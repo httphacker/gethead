@@ -1,0 +1,4 @@
+v0.1 - Current Release
+- Written in Python 2.7
+- Performs HTTP Header Analysis
+- Reports Header Vulnerabilities
