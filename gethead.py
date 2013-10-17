@@ -10,11 +10,11 @@
 #  |___/                                 
 #
 # description:	http header vulnerability analysis project
-# github:	https://github.com/httphacker
-# email:	httphacker@icloud.com
-# website:	http://httphacker.com
-# twitter:	@httphacker
-# version:	0.1
+# github:	    https://github.com/httphacker
+# email:	    httphacker@icloud.com
+# website:	    http://httphacker.com
+# twitter:	    @httphacker
+# version:	    0.1
 
 import sys
 import urllib2
