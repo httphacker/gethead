@@ -60,7 +60,7 @@ else:
   printout('- Server does not enforce Cross-Site Scripting Protection.\nThe X-XSS-Protection Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting Attacks.\n\n', WHITE)
 
 # check x-frame-options:
-if response.info().getheader('x-frame-options') == 'deny' or 'sameorigin':
+if response.info().getheader('x-frame-options') and response.info().getheader('x-frame-options').lower() in ['deny', 'sameorigin']:
   printout('(X-Frame-Options) Cross-Frame Scripting Protection is enforced.\n\n', GREEN)
 else:
   printout('Vulnerability ', RED)
