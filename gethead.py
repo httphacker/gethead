@@ -18,6 +18,9 @@
 
 import sys
 import urllib2
+import ssl
+
+ssl._create_default_https_context = ssl._create_unverified_context
 
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
