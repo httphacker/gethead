@@ -119,8 +119,8 @@ else:
   printout('- Server does not enforce a File Download and Open Policy.\nThe X-Download-Options Header setting is either inadequate or missing.\nClient may be vulnerable to Browser File Execution Attacks. [VALUE: %s]\n\n' % (response.info().getheader('x-download-options') if response.info().getheader('x-download-options') else 'MISSING'), WHITE)
 
 # check cache-control:
-if response.info().getheader('cache-control'):
-  printout('(Cache-control) Private Content Cacheing is enforced. [VALUE: %s]\n\n' % response.info().getheader('cache-control'), GREEN)
+if response.info().getheader('cache-control') and (response.info().getheader('cache-control').startswith('private') or response.info().getheader('cache-control').startswith('no-cache')):
+  printout('(Cache-control) Private Caching or No-Cache is enforced. [VALUE: %s]\n\n' % response.info().getheader('cache-control'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce a Content Cacheing Policy.\nThe Cache-control Header setting is either inadequate or missing.\nClient may be vulnerable to Content Caching Attacks. [VALUE: %s]\n\n' % (response.info().getheader('cache-control') if response.info().getheader('cache-control') else 'MISSING'), WHITE)
+  printout('- Server does not enforce a Content Caching Policy.\nThe Cache-control Header setting is either inadequate or missing.\nClient may be vulnerable to Content Caching Attacks. [VALUE: %s]\n\n' % (response.info().getheader('cache-control') if response.info().getheader('cache-control') else 'MISSING'), WHITE)
