@@ -55,38 +55,38 @@ else:
 
 # check x-xss-protection:
 if response.info().getheader('x-xss-protection') == '1; mode=block':
-  printout('(X-XSS-Protection) Cross-Site Scripting Protection is enforced.\n\n', GREEN)
+  printout('(X-XSS-Protection) Cross-Site Scripting Protection is enforced. [VALUE: %s]\n\n' % response.info().getheader('x-xss-protection'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce Cross-Site Scripting Protection.\nThe X-XSS-Protection Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting Attacks.\n\n', WHITE)
+  printout('- Server does not enforce Cross-Site Scripting Protection.\nThe X-XSS-Protection Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting Attacks. [VALUE: %s]\n\n' % (response.info().getheader('x-xss-protection') if response.info().getheader('x-xss-protection') else 'MISSING'), WHITE)
 
 # check x-frame-options:
 if response.info().getheader('x-frame-options') and response.info().getheader('x-frame-options').lower() in ['deny', 'sameorigin']:
-  printout('(X-Frame-Options) Cross-Frame Scripting Protection is enforced.\n\n', GREEN)
+  printout('(X-Frame-Options) Cross-Frame Scripting Protection is enforced. [VALUE: %s]\n\n' % response.info().getheader('x-frame-options'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce Cross-Frame Scripting Protection.\nThe X-Frame-Options Header setting is either inadequate or missing.\nClient may be vulnerable to Click-Jacking Attacks.\n\n', WHITE)
+  printout('- Server does not enforce Cross-Frame Scripting Protection.\nThe X-Frame-Options Header setting is either inadequate or missing.\nClient may be vulnerable to Click-Jacking Attacks. [VALUE: %s]\n\n' % (response.info().getheader('x-frame-options') if response.info().getheader('x-frame-options') else 'MISSING'), WHITE)
 
 # check x-content-type-options:
 if response.info().getheader('x-content-type-options') == 'nosniff':
-  printout('(X-Content-Type-Options) MIME-Sniffing Protection is enforced.\n\n', GREEN)
+  printout('(X-Content-Type-Options) MIME-Sniffing Protection is enforced. [VALUE: %s]\n\n' % response.info().getheader('x-content-type-options'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce MIME-Sniffing Protection.\nThe X-Content-Type-Options Header setting is either inadequate or missing.\nClient may be vulnerable to MIME-Sniffing Attacks.\n\n', WHITE)
+  printout('- Server does not enforce MIME-Sniffing Protection.\nThe X-Content-Type-Options Header setting is either inadequate or missing.\nClient may be vulnerable to MIME-Sniffing Attacks. [VALUE: %s]\n\n' % (response.info().getheader('x-content-type-options') if response.info().getheader('x-content-type-options') else 'MISSING'), WHITE)
 
 # check strict-transport-security:
 if response.info().getheader('strict-transport-security'):
-  printout('(Strict-Transport-Security) HTTP over TLS/SSL is enforced.\n\n', GREEN)
+  printout('(Strict-Transport-Security) HTTP over TLS/SSL is enforced. [VALUE: %s]\n\n' % response.info().getheader('strict-transport-security'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce HTTP over TLS/SSL Connections.\nThe Strict-Transport-Security Header setting is either inadequate or missing.\nClient may be vulnerable to Session Information Leakage.\n\n', WHITE)
+  printout('- Server does not enforce HTTP over TLS/SSL Connections.\nThe Strict-Transport-Security Header setting is either inadequate or missing.\nClient may be vulnerable to Session Information Leakage. [VALUE: %s]\n\n' % (response.info().getheader('strict-transport-security') if response.info().getheader('strict-transport-security') else 'MISSING'), WHITE)
 
 # check content-security-policy:
 if response.info().getheader('content-security-policy'):
-  printout('(Content-Security-Policy) Content Security Policy is enforced.\n\n', GREEN)
+  printout('(Content-Security-Policy) Content Security Policy is enforced. [VALUE: %s]\n\n' % response.info().getheader('content-security-policy'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce a Content Security Policy.\nThe Content-Security-Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks.\n\n', WHITE)
+  printout('- Server does not enforce a Content Security Policy.\nThe Content-Security-Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks. [VALUE: %s]\n\n' % (response.info().getheader('content-security-policy') if response.info().getheader('content-security-policy') else 'MISSING'), WHITE)
 
 # check x-content-security-policy:
 if response.info().getheader('x-content-security-policy'):
@@ -106,21 +106,21 @@ if response.info().getheader('x-webkit-csp'):
 
 # check access-control-allow-origin:
 if response.info().getheader('access-control-allow-origin'):
-  printout('(Access-Control-Allow-Origin) Access Control Policies are enforced.\n\n', GREEN)
+  printout('(Access-Control-Allow-Origin) Access Control Policies are enforced. [VALUE: %s]\n\n' % response.info().getheader('access-control-allow-origin'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce an Access Control Policy.\nThe Access-Control-Allow-Origin Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Domain Scripting Attacks.\n\n', WHITE)
+  printout('- Server does not enforce an Access Control Policy.\nThe Access-Control-Allow-Origin Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Domain Scripting Attacks. [VALUE: %s]\n\n' % (response.info().getheader('access-control-allow-origin') if response.info().getheader('access-control-allow-origin') else 'MISSING'), WHITE)
 
 # check x-download-options:
 if response.info().getheader('x-download-options') == 'noopen':
-  printout('(X-Download-Options) File Download and Open Restriction Policies are enforced.\n\n', GREEN)
+  printout('(X-Download-Options) File Download and Open Restriction Policies are enforced. [VALUE: %s]\n\n' % response.info().getheader('x-download-options'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce a File Download and Open Policy.\nThe X-Download-Options Header setting is either inadequate or missing.\nClient may be vulnerable to Browser File Execution Attacks.\n\n', WHITE)
+  printout('- Server does not enforce a File Download and Open Policy.\nThe X-Download-Options Header setting is either inadequate or missing.\nClient may be vulnerable to Browser File Execution Attacks. [VALUE: %s]\n\n' % (response.info().getheader('x-download-options') if response.info().getheader('x-download-options') else 'MISSING'), WHITE)
 
 # check cache-control:
 if response.info().getheader('cache-control'):
-  printout('(Cache-control) Private Content Cacheing is enforced.\n\n', GREEN)
+  printout('(Cache-control) Private Content Cacheing is enforced. [VALUE: %s]\n\n' % response.info().getheader('cache-control'), GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce a Content Cacheing Policy.\nThe Cache-control Header setting is either inadequate or missing.\nClient may be vulnerable to Content Caching Attacks.\n\n', WHITE)
+  printout('- Server does not enforce a Content Cacheing Policy.\nThe Cache-control Header setting is either inadequate or missing.\nClient may be vulnerable to Content Caching Attacks. [VALUE: %s]\n\n' % (response.info().getheader('cache-control') if response.info().getheader('cache-control') else 'MISSING'), WHITE)
