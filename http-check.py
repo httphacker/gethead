@@ -1,17 +1,14 @@
 #!/usr/bin python
 
-#             _   _                    _
-#            | | | |                  | |
-#   __ _  ___| |_| |__   ___  __ _  __| |
-#  / _` |/ _ \ __| '_ \ / _ \/ _` |/ _` |
-# | (_| |  __/ |_| | | |  __/ (_| | (_| |
-#  \__, |\___|\__|_| |_|\___|\__,_|\__,_|
-#   __/ |
-#  |___/
+#    __  __________________        ________  ________________ __
+#   / / / /_  __/_  __/ __ \      / ____/ / / / ____/ ____/ //_/
+#  / /_/ / / /   / / / /_/ /_____/ /   / /_/ / __/ / /   / ,<
+# / __  / / /   / / / ____/_____/ /___/ __  / /___/ /___/ /| |
+#/_/ /_/ /_/   /_/ /_/          \____/_/ /_/_____/\____/_/ |_|
 #
 # description:  http header vulnerability analysis project
-# github:       https://github.com/phra
-# forked from:  https://github.com/httphacker
+# github:       https://github.com/phra/http-check
+# forked from:  https://github.com/httphacker/gethead
 # version:      0.2
 
 import sys
