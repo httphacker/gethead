@@ -121,3 +121,10 @@ if response.info().getheader('cache-control') and (response.info().getheader('ca
 else:
   printout('Vulnerability ', RED)
   printout('- Server does not enforce a Content Caching Policy.\nThe Cache-control Header setting is either inadequate or missing.\nClient may be vulnerable to Content Caching Attacks. [VALUE: %s]\n\n' % (response.info().getheader('cache-control') if response.info().getheader('cache-control') else 'MISSING'), WHITE)
+
+# check x-permitted-cross-domain-policies:
+if response.info().getheader('X-Permitted-Cross-Domain-Policies') == 'master-only' or response.info().getheader('X-Permitted-Cross-Domain-Policies') == 'none':
+  printout('(X-Permitted-Cross-Domain-Policies) X-Permitted-Cross-Domain-Policies are enforced. [VALUE: %s]\n\n' % response.info().getheader('X-Permitted-Cross-Domain-Policies'), GREEN)
+else:
+  printout('Vulnerability ', RED)
+  printout('- Server does not enforce a X-Permitted-Cross-Domain-Policies.\nThe Cross-Domain Meta Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Protocol-Scripting Attacks. [VALUE: %s]\n\n' % (response.info().getheader('X-Permitted-Cross-Domain-Policies') if response.info().getheader('X-Permitted-Cross-Domain-Policies') else 'MISSING'), WHITE)
