@@ -1,20 +1,18 @@
 #!/usr/bin python
 
-#             _   _                    _ 
+#             _   _                    _
 #            | | | |                  | |
 #   __ _  ___| |_| |__   ___  __ _  __| |
 #  / _` |/ _ \ __| '_ \ / _ \/ _` |/ _` |
 # | (_| |  __/ |_| | | |  __/ (_| | (_| |
 #  \__, |\___|\__|_| |_|\___|\__,_|\__,_|
-#   __/ |                                
-#  |___/                                 
+#   __/ |
+#  |___/
 #
-# description:	http header vulnerability analysis project
-# github:	    https://github.com/httphacker
-# email:	    httphacker@icloud.com
-# website:	    http://httphacker.com
-# twitter:	    @httphacker
-# version:	    0.1
+# description:  http header vulnerability analysis project
+# github:       https://github.com/phra
+# forked from:  https://github.com/httphacker
+# version:      0.2
 
 import sys
 import urllib2
@@ -52,14 +50,14 @@ if len(sys.argv) < 2:
   sys.exit()
 else:
   response = urllib2.urlopen(sys.argv[1])
-  print 
+  print
   printout('HTTP Header Analysis for ' + sys.argv[1] + ':' + '\n\n', CYAN)
 
 # check x-xss-protection:
 if response.info().getheader('x-xss-protection') == '1; mode=block':
   printout('(X-XSS-Protection) Cross-Site Scripting Protection is enforced.\n\n', GREEN)
 else:
-  printout('Vulnerability ', RED) 
+  printout('Vulnerability ', RED)
   printout('- Server does not enforce Cross-Site Scripting Protection.\nThe X-XSS-Protection Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting Attacks.\n\n', WHITE)
 
 # check x-frame-options:
@@ -73,7 +71,7 @@ else:
 if response.info().getheader('x-content-type-options') == 'nosniff':
   printout('(X-Content-Type-Options) MIME-Sniffing Protection is enforced.\n\n', GREEN)
 else:
-  printout('Vulnerability ', RED) 
+  printout('Vulnerability ', RED)
   printout('- Server does not enforce MIME-Sniffing Protection.\nThe X-Content-Type-Options Header setting is either inadequate or missing.\nClient may be vulnerable to MIME-Sniffing Attacks.\n\n', WHITE)
 
 # check strict-transport-security:
