@@ -54,7 +54,7 @@ else:
   printout('HTTP Header Analysis for ' + sys.argv[1] + ':' + '\n\n', CYAN)
 
 # check x-xss-protection:
-if response.info().getheader('x-xss-protection') == '1; mode=block':
+if response.info().getheader('x-xss-protection') and (response.info().getheader('x-xss-protection').startswith('1; mode=block') or response.info().getheader('x-xss-protection').startswith('1;mode=block')):
   printout('(X-XSS-Protection) Cross-Site Scripting Protection is enforced. [VALUE: %s]\n\n' % response.info().getheader('x-xss-protection'), GREEN)
 else:
   printout('Vulnerability ', RED)
