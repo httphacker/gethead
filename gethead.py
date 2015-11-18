@@ -81,19 +81,28 @@ else:
   printout('Vulnerability ', RED)
   printout('- Server does not enforce HTTP over TLS/SSL Connections.\nThe Strict-Transport-Security Header setting is either inadequate or missing.\nClient may be vulnerable to Session Information Leakage.\n\n', WHITE)
 
-# check x-content-security-policy:
-if response.info().getheader('x-content-security-policy'):
-  printout('(X-Content-Security-Policy) Content Security Policy is enforced.\n\n', GREEN)
+# check content-security-policy:
+if response.info().getheader('content-security-policy'):
+  printout('(Content-Security-Policy) Content Security Policy is enforced.\n\n', GREEN)
 else:
   printout('Vulnerability ', RED)
-  printout('- Server does not enforce a Content Security Policy.\nThe X-Content-Security-Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks.\n\n', WHITE)
+  printout('- Server does not enforce a Content Security Policy.\nThe Content-Security-Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks.\n\n', WHITE)
+
+# check x-content-security-policy:
+if response.info().getheader('x-content-security-policy'):
+  printout('Deprecated ', YELLOW)
+  if not response.info().getheader('content-security-policy'):
+    printout('(X-Content-Security-Policy) Content Security Policy is enforced. (SWITCH TO STANDARD HTTP HEADER: \'Content-Security-Policy\')\n\n', WHITE)
+  else:
+    printout('(X-Content-Security-Policy) Content Security Policy is enforced. (DROP DEPRECATED HEADER: \'X-Content-Security-Policy\')\n\n', WHITE)
 
 # check x-webkit-csp:
 if response.info().getheader('x-webkit-csp'):
-  printout('(X-WebKit-CSP) Content Security Policy is enforced.\n\n', GREEN)
-else:
-  printout('Vulnerability ', RED)
-  printout('- Server does not enforce a Content Security Policy.\nThe X-WebKit-CSP Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks.\n\n', WHITE)
+  printout('Deprecated ', YELLOW)
+  if not response.info().getheader('content-security-policy'):
+    printout('(X-Webkit-CSP) Content Security Policy is enforced. (SWITCH TO STANDARD HTTP HEADER: \'Content-Security-Policy\')\n\n', WHITE)
+  else:
+    printout('(X-Webkit-CSP) Content Security Policy is enforced. (DROP DEPRECATED HEADER: \'X-Webkit-CSP\')\n\n', WHITE)
 
 # check access-control-allow-origin:
 if response.info().getheader('access-control-allow-origin'):
