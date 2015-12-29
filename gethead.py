@@ -60,7 +60,7 @@ else:
   printout('- Server does not enforce Cross-Site Scripting Protection.\nThe X-XSS-Protection Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting Attacks.\n\n', WHITE)
 
 # check x-frame-options:
-if response.info().getheader('x-frame-options') == 'deny' or 'sameorigin':
+if response.info().getheader('x-frame-options') and response.info().getheader('x-frame-options').lower() in ['deny', 'sameorigin']:
   printout('(X-Frame-Options) Cross-Frame Scripting Protection is enforced.\n\n', GREEN)
 else:
   printout('Vulnerability ', RED)
@@ -81,8 +81,8 @@ else:
   printout('- Server does not enforce HTTP over TLS/SSL Connections.\nThe Strict-Transport-Security Header setting is either inadequate or missing.\nClient may be vulnerable to Session Information Leakage.\n\n', WHITE)
 
 # check x-content-security-policy:
-if response.info().getheader('x-content-security-policy'):
-  printout('(X-Content-Security-Policy) Content Security Policy is enforced.\n\n', GREEN)
+if response.info().getheader('content-security-policy'):
+  printout('(Content-Security-Policy) Content Security Policy is enforced.\n\n', GREEN)
 else:
   printout('Vulnerability ', RED)
   printout('- Server does not enforce a Content Security Policy.\nThe X-Content-Security-Policy Header setting is either inadequate or missing.\nClient may be vulnerable to Cross-Site Scripting and Injection Attacks.\n\n', WHITE)
